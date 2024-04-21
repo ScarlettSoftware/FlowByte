@@ -84,9 +84,11 @@ int main()
 
         switch (choice) {
         case 1:
+            system("CLS");
             spoofer(); // Call function from "Tabs/Tools.h"
             break;
         case 2:
+            system("CLS");
             passgen(); // Call function from "Tabs/Tools.h"
             break;
         default:
