@@ -1,7 +1,7 @@
 #include <iostream>
 
 void passgen() {
-    const string charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const string charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
     const int length = 18;
 
     // Seed the random number generator
@@ -14,7 +14,7 @@ void passgen() {
             password += charset[rand() % charset.length()];
         }
 
-        cout << "Generated Password " << j + 1 << ": " << password << endl;
+        cout << hue::light_purple << "[FlowByte] " << hue::reset << "Generated Password " << ": " << password << endl;
     }
 }
 
