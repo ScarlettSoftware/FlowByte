@@ -5,7 +5,7 @@ void applications() {
     system("CLS");
     int choice;
     
-    cout << hue::light_aqua << "[FlowByte Menu]" << hue::reset << endl;
+    cout << hue::light_aqua << "[FlowByte Menu]" << hue::reset << " Applications" << endl;
     cout << " " << endl;
     cout << "[1]  Adobe Photoshop 2024" << endl;
     cout << "[2]  Adobe After Effects 2023" << endl;
