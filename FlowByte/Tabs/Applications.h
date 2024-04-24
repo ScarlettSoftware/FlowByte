@@ -4,7 +4,9 @@
 void applications() {
     system("CLS");
     int choice;
-
+    
+    cout << hue::light_aqua << "[FlowByte Menu]" << hue::reset << endl;
+    cout << " " << endl;
     cout << "[1]  Adobe Photoshop 2024" << endl;
     cout << "[2]  Adobe After Effects 2023" << endl;
     cout << "[3]  Adobe Illustrator 2024" << endl;
@@ -80,6 +82,6 @@ void applications() {
         break;
     default:
         cout << "[Info]" << hue::red << " Invalid" << hue::reset << " choice" << endl;
-        cout << "[Info]" << hue::light_blue << " Please enter a number between 1 and 3." << hue::reset << endl;
+        cout << "[Info]" << hue::light_blue << " Please enter a number between 1 and 10." << hue::reset << endl;
     }
 }
