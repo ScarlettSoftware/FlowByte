@@ -7,13 +7,21 @@
 #include "Tabs/Emulators.h"
 #include "Tabs/Tools.h"
 using namespace std;
-//Tabs
 
-string app_version = " v1.0.0.4";
+string app_version = " v1.0.0.5";
 string app_build = "Beta";
-string last_updated = "21/04/2024 11:00 PM EEST";
+string last_updated = "24/04/2024 9:50 PM EEST";
 string current_user = "HeavenlyRestricted";
 string app_creator = "HeavenlyRestricted1337";
+
+/* GatherInformation.h Strings*/
+string GetComputerUser = GetComputerUserName();
+string GetComputerGraphics = GetComputerGPUName();
+string GetComputerCPU = GetCpuName();
+string GetComputerRam = GetRamInfo();
+string Getmobname = GetMotherboardName();
+string GetWinVer = GetWindowsVersion();
+/* GatherInformation.h Strings */
 
 int main()
 {
@@ -25,18 +33,18 @@ int main()
     system("CLS");
 
     // Display menu options
-    cout << hue::light_purple << "[FlowByte]" << hue::reset << " Welcome Back, " << hue::light_yellow << current_user << hue::reset << endl;
+     cout << hue::light_purple << "[FlowByte]" << hue::reset << " Welcome Back, " << hue::light_yellow << GetComputerUser << hue::reset << endl;
     cout << " " << endl;
 
     int choice;
-
-    cout << hue::light_aqua << "[FlowByte Menu]" << hue::reset << endl;
+    cout << hue::light_aqua << "[FlowByte Menu]" << hue::reset << " Dashboard" << endl;
     cout << " " << endl;
     cout << hue::light_aqua << "[1]" << hue::reset << " Home" << endl; 
     cout << hue::light_aqua << "[2]" << hue::reset << " Download" << endl; 
     cout << hue::light_aqua << "[3]" << hue::reset << " Tools" << endl; 
+    cout << hue::light_aqua << "[4]" << hue::reset << " Options" << endl;
     cout << " " << endl;
-    cout << "[Info] Enter your choice (1-3): ";
+    cout << "[Info] Enter your choice (1-4): ";
     cin >> choice;
 
     switch (choice) {
@@ -52,7 +60,7 @@ int main()
     case 2:
         // Download tab Functionality
         system("CLS");
-         cout << hue::light_aqua << "[FlowByte Menu]" << hue::reset << endl;
+        cout << hue::light_aqua << "[FlowByte Menu]" << hue::reset << " Download" << endl;
         cout << " " << endl;
         cout << hue::light_aqua << "[1]" << hue::reset << " Applications" << endl;
         cout << hue::light_aqua << "[2]" << hue::reset << " Games" << endl;
@@ -79,7 +87,7 @@ int main()
     case 3:
         // Tools tab functionality
         system("CLS");
-        cout << hue::light_aqua << "[FlowByte Menu]" << hue::reset << endl;
+        cout << hue::light_aqua << "[FlowByte Menu]" << hue::reset << " Tools" << endl;
         cout << " " << endl;
         cout << hue::light_red << "[1]" << hue::reset << " Spoofer" << endl;
         cout << hue::light_aqua << "[2]" << hue::reset << " PassGen" << endl;
@@ -101,6 +109,35 @@ int main()
             cout << "[Info]" << hue::red << " Please enter a number between 1 and 2." << hue::reset << endl;
         }
         break;
+            case 4:
+        // Tools tab functionality
+        system("CLS");
+          cout << hue::light_aqua << "[FlowByte Menu]" << hue::reset << " Options" << endl;
+        cout << " " << endl;
+        cout << hue::light_red << "[1]" << hue::reset << " System Specifications" << endl;
+        cout << hue::light_aqua << "[2]" << hue::reset << " Other" << endl;
+        cout << " " << endl;
+        cout << "[Info] Enter your choice (1-2): ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+            system("CLS");
+            cout << hue::light_purple << "[FlowByte]" << " Options" << hue::reset << endl;
+            cout << " " << endl;
+            cout << dye::purple("USER: ") << GetComputerUser << endl;
+            cout << dye::purple("GPU: ") << GetComputerGraphics << endl;
+            cout << dye::purple("CPU: ") << GetComputerCPU << endl;
+            cout << dye::purple("RAM: ") << GetComputerRam << endl;
+            cout << dye::purple("MOB: ") << Getmobname << endl;
+            cout << dye::purple("WIN: ") << GetWinVer << endl;
+            break;
+        case 2:
+            system("CLS");
+            cout << hue::light_aqua << "[FlowByte Menu]" << hue::reset << endl;
+            cout << " " << endl;
+            cout << hue::light_red << "[FlowByte]" << hue::reset << " currently other tab is not available, sorry for inconvenience" << endl;
+            break;
     default:
         cout << "[Info]" << hue::red << " Invalid" << hue::reset << " choice" << endl;
         cout << "[Info]" << hue::light_blue << " Please enter a number between 1 and 3." << hue::reset << endl;
