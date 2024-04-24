@@ -9,16 +9,16 @@
 using namespace std;
 //Tabs
 
-string app_version = " v1.0.0.3";
+string app_version = " v1.0.0.4";
+string app_build = "Beta";
 string last_updated = "21/04/2024 11:00 PM EEST";
 string current_user = "HeavenlyRestricted";
 string app_creator = "HeavenlyRestricted1337";
-string app_build = "Stable";
 
 int main()
 {
-    cout << dye::light_purple("    FlowByte v1.0.0.3 Beta") << endl;
-    cout << ("----------------------------------------") << endl;
+    cout << dye::light_purple("    FlowByte ") << app_version << app_build << endl;
+    cout << ("----------------Credits-----------------") << endl;
     cout << dye::purple(" by HeavenlyRestricted // Team Scarlett ") << endl;
     cout << ("----------------------------------------") << endl;
     Sleep(3000);
@@ -27,13 +27,14 @@ int main()
     // Display menu options
     cout << hue::light_purple << "[FlowByte]" << hue::reset << " Welcome Back, " << hue::light_yellow << current_user << hue::reset << endl;
     cout << " " << endl;
-    cout << hue::light_purple << "[FlowByte]" << hue::reset << " Choose Tab : " << endl;
-    cout << " " << endl;
 
     int choice;
-    cout << hue::light_aqua << "[Menu]" << hue::reset << " [1] Home" << endl; 
-    cout << hue::light_aqua << "[Menu]" << hue::reset << " [2] Download" << endl; 
-    cout << hue::light_aqua << "[Menu]" << hue::reset << " [3] Tools" << endl; 
+
+    cout << hue::light_aqua << "[FlowByte Menu]" << hue::reset << endl;
+    cout << " " << endl;
+    cout << hue::light_aqua << "[1]" << hue::reset << " Home" << endl; 
+    cout << hue::light_aqua << "[2]" << hue::reset << " Download" << endl; 
+    cout << hue::light_aqua << "[3]" << hue::reset << " Tools" << endl; 
     cout << " " << endl;
     cout << "[Info] Enter your choice (1-3): ";
     cin >> choice;
@@ -51,9 +52,11 @@ int main()
     case 2:
         // Download tab Functionality
         system("CLS");
-        cout << hue::light_aqua << "[Menu]" << hue::reset << " [1] Applications" << endl;
-        cout << hue::light_aqua << "[Menu]" << hue::reset << " [2] Games" << endl;
-        cout << hue::light_aqua << "[Menu]" << hue::reset << " [3] Emulators" << endl;
+         cout << hue::light_aqua << "[FlowByte Menu]" << hue::reset << endl;
+        cout << " " << endl;
+        cout << hue::light_aqua << "[1]" << hue::reset << " Applications" << endl;
+        cout << hue::light_aqua << "[2]" << hue::reset << " Games" << endl;
+        cout << hue::light_aqua << "[3]" << hue::reset << " Emulators" << endl;
         cout << " " << endl;
         cout << "[Info] Enter your choice (1-3): ";
         cin >> choice;
@@ -76,8 +79,10 @@ int main()
     case 3:
         // Tools tab functionality
         system("CLS");
-        cout << hue::light_red << "[Menu]" << hue::reset << " [1] Spoofer" << endl;
-        cout << hue::light_aqua << "[Menu]" << hue::reset << " [2] PassGen" << endl;
+        cout << hue::light_aqua << "[FlowByte Menu]" << hue::reset << endl;
+        cout << " " << endl;
+        cout << hue::light_red << "[1]" << hue::reset << " Spoofer" << endl;
+        cout << hue::light_aqua << "[2]" << hue::reset << " PassGen" << endl;
         cout << " " << endl;
         cout << "[Info] Enter your choice (1-2): ";
         cin >> choice;
