@@ -2,7 +2,7 @@
 
 void emulators() {
     system("CLS");
-    cout << hue::light_aqua << "[FlowByte Menu]" << hue::reset << endl;
+    cout << hue::light_aqua << "[FlowByte Menu]" << hue::reset << " Emulators" << endl;
     cout << " " << endl;
     cout << hue::light_red << "[FlowByte]" << hue::reset << hue::aqua << " Fuck Nintendo" << hue::reset << endl;
     cout << " " << endl;
