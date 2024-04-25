@@ -6,6 +6,7 @@
 #include "Tabs/Games.h"
 #include "Tabs/Emulators.h"
 #include "Tabs/Tools.h"
+#include "Tabs/Options.h"
 using namespace std;
 
 string app_version = " v1.0.0.5";
@@ -13,15 +14,6 @@ string app_build = "Beta";
 string last_updated = "24/04/2024 9:50 PM EEST";
 string current_user = "HeavenlyRestricted";
 string app_creator = "HeavenlyRestricted1337";
-
-/* GatherInformation.h Strings*/
-string GetComputerUser = GetComputerUserName();
-string GetComputerGraphics = GetComputerGPUName();
-string GetComputerCPU = GetCpuName();
-string GetComputerRam = GetRamInfo();
-string Getmobname = GetMotherboardName();
-string GetWinVer = GetWindowsVersion();
-/* GatherInformation.h Strings */
 
 int main()
 {
@@ -112,7 +104,7 @@ int main()
             case 4:
         // Tools tab functionality
         system("CLS");
-          cout << hue::light_aqua << "[FlowByte Menu]" << hue::reset << " Options" << endl;
+        cout << hue::light_aqua << "[FlowByte Menu]" << hue::reset << " Options" << endl;
         cout << " " << endl;
         cout << hue::light_red << "[1]" << hue::reset << " System Specifications" << endl;
         cout << hue::light_aqua << "[2]" << hue::reset << " Other" << endl;
@@ -123,14 +115,7 @@ int main()
         switch (choice) {
         case 1:
             system("CLS");
-            cout << hue::light_purple << "[FlowByte]" << " Options" << hue::reset << endl;
-            cout << " " << endl;
-            cout << dye::purple("USER: ") << GetComputerUser << endl;
-            cout << dye::purple("GPU: ") << GetComputerGraphics << endl;
-            cout << dye::purple("CPU: ") << GetComputerCPU << endl;
-            cout << dye::purple("RAM: ") << GetComputerRam << endl;
-            cout << dye::purple("MOB: ") << Getmobname << endl;
-            cout << dye::purple("WIN: ") << GetWinVer << endl;
+            options_sysinfo();
             break;
         case 2:
             system("CLS");
