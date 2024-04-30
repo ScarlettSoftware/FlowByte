@@ -10,7 +10,7 @@
 using namespace std;
 
 string app_version = " v1.0.0.5";
-string app_build = "Beta";
+string app_build = " Beta";
 string last_updated = "24/04/2024 9:50 PM EEST";
 string current_user = "HeavenlyRestricted";
 string app_creator = "HeavenlyRestricted1337";
@@ -91,10 +91,12 @@ int main()
         case 1:
             system("CLS");
             spoofer(); // Call function from "Tabs/Tools.h"
+            system("pause");
             break;
         case 2:
             system("CLS");
             passgen(); // Call function from "Tabs/Tools.h"
+            system("pause");
             break;
         default:
             cout << "[Info]" << hue::red << " Invalid" << hue::reset << " choice" << endl;
@@ -116,6 +118,7 @@ int main()
         case 1:
             system("CLS");
             options_sysinfo();
+            system("pause");
             break;
         case 2:
             system("CLS");
