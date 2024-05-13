@@ -3,20 +3,21 @@
 #include <string>
 #include <lmcons.h>
 #include <cstdlib>
-#pragma comment(lib,"user32.lib")
 #include <intrin.h>
 #include <array>
 #include <cstdlib>
 #include <cstdio>
 #include <fstream>
+#include <winerror.h>
 
+// Gather Information
 string GetComputerUserName() {
     char username[UNLEN + 1];
     DWORD username_len = UNLEN + 1;
 
     if (GetUserNameA(username, &username_len)) {
         // Convert the username to string
-        std::string usernameStr = string(username);
+        std::string usernameStr(username);
 
         // Capitalize the first letter
         if (!usernameStr.empty()) {
@@ -26,21 +27,41 @@ string GetComputerUserName() {
         return usernameStr;
     }
     else {
-        return "Error getting user name.";
+        DWORD errorCode = GetLastError();
+        std::cerr << "Error getting user name. Error code: " << errorCode << std::endl;
+        return "";
     }
 }
 
 string GetComputerGPUName() {
-    // Get handle to the first display device
     DISPLAY_DEVICE displayDevice;
     displayDevice.cb = sizeof(DISPLAY_DEVICE);
     EnumDisplayDevices(NULL, 0, &displayDevice, 0);
 
-    // Get GPU name from the display device
-    return displayDevice.DeviceString;
+    // Get the length of the wide character string
+    int length = wcslen(displayDevice.DeviceString);
+
+    // Calculate the required buffer size for the narrow character string
+    int bufferSize = WideCharToMultiByte(CP_UTF8, 0, displayDevice.DeviceString, length, NULL, 0, NULL, NULL);
+
+    // Allocate buffer for the narrow character string
+    char* buffer = new char[bufferSize + 1];
+
+    // Convert wide character string to narrow character string
+    WideCharToMultiByte(CP_UTF8, 0, displayDevice.DeviceString, length, buffer, bufferSize, NULL, NULL);
+
+    // Null-terminate the narrow character string
+    buffer[bufferSize] = '\0';
+
+    std::string result(buffer);
+
+    // Clean up allocated buffer
+    delete[] buffer;
+
+    return result;
 }
 
-string GetCpuName()
+string GetComputerCpuName()
 {
     // 4 is essentially hardcoded due to the __cpuid function requirements.
     // NOTE: Results are limited to whatever the sizeof(int) * 4 is...
@@ -49,7 +70,7 @@ string GetCpuName()
 
     std::array<char, 64> charBuffer = {};
 
- 
+
     constexpr std::array<int, 3> functionIds = {
         0x8000'0002,
         0x8000'0003,
@@ -73,9 +94,9 @@ string GetCpuName()
     return cpu;
 }
 
-string GetRamInfo() {
+string GetComputerRamInfo() {
     typedef BOOL(WINAPI* PGMSE)(LPMEMORYSTATUSEX);
-    PGMSE pGMSE = (PGMSE)GetProcAddress(GetModuleHandle(TEXT("kernel32.dll")), TEXT("GlobalMemoryStatusEx"));
+    PGMSE pGMSE = (PGMSE)GetProcAddress(GetModuleHandle(TEXT("kernel32.dll")), "GlobalMemoryStatusEx"); // Use narrow character string literal
     if (pGMSE != nullptr) {
         MEMORYSTATUSEX mi;
         memset(&mi, 0, sizeof(MEMORYSTATUSEX));
@@ -93,21 +114,26 @@ string GetRamInfo() {
         return "" + std::to_string(static_cast<int>(std::ceil(static_cast<double>(mi.dwTotalPhys) / (1024.0 * 1024.0 * 1024.0)))) + "GB";
     }
     return "Error: Failed to retrieve RAM information.";
+
 }
 
-string GetMotherboardName() {
+string GetComputerMotherboardName() {
     HKEY hKey;
-    string motherboardName;
+    std::string motherboardName;
 
     // Open the registry key
-    if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\BIOS", 0, KEY_QUERY_VALUE, &hKey) == ERROR_SUCCESS) {
+    if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, L"HARDWARE\\DESCRIPTION\\System\\BIOS", 0, KEY_QUERY_VALUE, &hKey) == ERROR_SUCCESS) {
         // Buffer to store the motherboard name
-        char buffer[256];
+        wchar_t buffer[256];
         DWORD bufferSize = sizeof(buffer);
 
         // Query the registry value
-        if (RegQueryValueEx(hKey, "BaseBoardProduct", nullptr, nullptr, reinterpret_cast<LPBYTE>(buffer), &bufferSize) == ERROR_SUCCESS) {
-            motherboardName = buffer;
+        if (RegQueryValueEx(hKey, L"BaseBoardProduct", nullptr, nullptr, reinterpret_cast<LPBYTE>(buffer), &bufferSize) == ERROR_SUCCESS) {
+            // Convert wide character string to narrow character string
+            int size_needed = WideCharToMultiByte(CP_UTF8, 0, buffer, -1, nullptr, 0, nullptr, nullptr);
+            std::string converted(size_needed, 0);
+            WideCharToMultiByte(CP_UTF8, 0, buffer, -1, &converted[0], size_needed, nullptr, nullptr);
+            motherboardName = converted;
         }
 
         // Close the registry key
@@ -115,9 +141,10 @@ string GetMotherboardName() {
     }
 
     return motherboardName;
+
 }
 
-string GetWindowsVersion() {
+string GetComputerWindowsVersion() {
     DWORD dwVersion = 0;
 
     // Retrieve version information using GetProductInfo
